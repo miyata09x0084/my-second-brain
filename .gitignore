@@ -1,0 +1,5 @@
+# macOS
+.DS_Store
+
+# AI出力（一時的な成果物）
+output/
