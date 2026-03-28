@@ -17,6 +17,7 @@
 output/              # AI出力ファイル
   research/          # リサーチ結果
   articles/          # 記事
+  x-posts/           # X投稿案
 ```
 
 ## スキルトリガー
@@ -27,6 +28,7 @@ output/              # AI出力ファイル
 | 「調べて」 | /deep-research | 6エージェント体制でリサーチチーム起動 |
 | 「記事を書いて」 | /write-article | 5フェーズで記事作成チーム起動 |
 | 「覚えておいて」 | /agent-memory | AI記憶の分類・保存 |
+| 「X投稿」 | /x-post | マルチエージェントでX投稿案を生成 |
 
 ## コンテキスト管理
 - セッション開始時: `00_context/memories/` の関連ファイルを確認する
