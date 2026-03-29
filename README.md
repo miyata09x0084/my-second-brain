@@ -33,7 +33,8 @@ coworker/
 │       ├── daily-schedule.md        # /daily-schedule
 │       ├── deep-research.md         # /deep-research
 │       ├── write-article.md         # /write-article
-│       └── agent-memory.md          # /agent-memory
+│       ├── agent-memory.md          # /agent-memory
+│       └── x-post.md               # /x-post
 ├── 00_context/
 │   └── memories/
 │       ├── preferences.md           # User preferences
@@ -93,6 +94,22 @@ Phase 5             Final review (typos, fact-check, SEO)
 ```
 
 Output: `output/articles/YYYY-MM-DD-{slug}.md`
+
+### `/x-post` — X Post Text Generator
+
+Trigger: "x投稿", "ツイートして"
+
+Generates 3 variations of X (Twitter) post text from a theme, article file, or draft.
+
+```
+Phase 1          Collect material (search / read file / analyze draft)
+       ↓
+Phase 2          Generate 3 patterns (Learning / Question / Tips)
+       ↓
+Phase 3          User selection
+       ↓
+Phase 4          Final adjustment & character count
+```
 
 ### `/agent-memory` — AI Memory Management
 

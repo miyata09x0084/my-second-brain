@@ -33,7 +33,8 @@ coworker/
 │       ├── daily-schedule.md        # /daily-schedule
 │       ├── deep-research.md         # /deep-research
 │       ├── write-article.md         # /write-article
-│       └── agent-memory.md          # /agent-memory
+│       ├── agent-memory.md          # /agent-memory
+│       └── x-post.md               # /x-post
 ├── 00_context/
 │   └── memories/
 │       ├── preferences.md           # ユーザーの好み・設定
@@ -93,6 +94,22 @@ Phase 5          最終レビュー（誤字脱字・事実確認・SEO）
 ```
 
 出力先: `output/articles/YYYY-MM-DD-{slug}.md`
+
+### `/x-post` — X投稿テキスト生成
+
+トリガー: 「x投稿」「ツイートして」
+
+テーマ・記事ファイル・下書きを入力として、X（Twitter）投稿用テキストを3パターン生成する。
+
+```
+Phase 1          素材収集（テーマ検索 / ファイル読込 / 下書き分析）
+       ↓
+Phase 2          3パターン生成（学び共有型 / 問題提起型 / 実用Tips型）
+       ↓
+Phase 3          ユーザー選択
+       ↓
+Phase 4          最終調整・文字数表示
+```
 
 ### `/agent-memory` — AI記憶管理
 
