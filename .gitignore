@@ -9,3 +9,10 @@ scripts/
 
 # ログ
 logs/
+
+# AI記憶（個人情報を含むため本体は管理外、テンプレのみ追跡）
+00_context/memories/*.md
+!00_context/memories/*.template.md
+
+# Claude Code ローカル設定（各マシン固有）
+.claude/settings.local.json

@@ -1,8 +1,10 @@
 <p align="center">English | <a href="README.ja.md">日本語</a></p>
 
-# Coworker — AI Productivity Assistant
+# kohAI — Your AI Kohai (後輩)
 
-A workspace that maximizes Claude Code productivity.
+A Claude Code workspace where **you are senpai, the AI is your kohai (junior colleague)**.
+The name `kohAI` is a double meaning: the Japanese word *kohai* (後輩, "junior") + *AI*. The design intent: **humans stay in the driver's seat, the AI supports**.
+
 Integrates a 3-layer CLAUDE.md architecture, sub-agent orchestration, and an AI memory system to streamline daily workflows.
 
 ## Architecture
@@ -11,8 +13,8 @@ Integrates a 3-layer CLAUDE.md architecture, sub-agent orchestration, and an AI 
 
 ```
 ~/.claude/CLAUDE.md              # Global config (work style)
-coworker/CLAUDE.md               # Project config (structure & triggers)
-coworker/.claude/rules/*.md      # Behavioral rules
+kohAI/CLAUDE.md                  # Project config (structure & triggers)
+kohAI/.claude/rules/*.md         # Behavioral rules
 ```
 
 | Layer | Role | Example |
@@ -24,7 +26,7 @@ coworker/.claude/rules/*.md      # Behavioral rules
 ## Directory Structure
 
 ```
-coworker/
+kohAI/
 ├── CLAUDE.md                        # Project config
 ├── .claude/
 │   ├── rules/
@@ -35,11 +37,11 @@ coworker/
 │       ├── write-article.md         # /write-article
 │       └── agent-memory.md          # /agent-memory
 ├── 00_context/
-│   └── memories/
-│       ├── preferences.md           # User preferences
-│       ├── decisions.md             # Decision log
-│       ├── context-log.md           # Cross-session context
-│       └── case-judgment-framework.md # Judgment criteria
+│   └── memories/                    # AI memory (personal *.md files are git-ignored)
+│       ├── preferences.template.md  # Copy to preferences.md on first use
+│       ├── decisions.template.md
+│       ├── context-log.template.md
+│       └── case-judgment-framework.template.md
 ├── 01_strategy/                     # Business strategy
 └── output/
     ├── research/                    # Research output
@@ -111,6 +113,16 @@ Trigger: "Remember this", "Take a note"
 
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) installed
 - Google Calendar MCP connected
+
+## Setup
+
+On first clone, initialize your local memory files from templates:
+
+```bash
+for f in 00_context/memories/*.template.md; do cp "$f" "${f%.template.md}.md"; done
+```
+
+Your personal memory (`*.md`) stays local and is git-ignored. Only the templates (`*.template.md`) are tracked.
 
 ## Design Principles
 
