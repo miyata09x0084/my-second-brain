@@ -32,6 +32,8 @@ kohAI/
 ├── .claude/
 │   ├── rules/
 │   │   └── behavioral-norms.md      # Behavioral norms
+│   ├── config/
+│   │   └── news-sources.yaml        # Declarative source defs for /tech-news
 │   └── commands/
 │       ├── daily-schedule.md        # /daily-schedule
 │       ├── tech-news.md             # /tech-news
@@ -78,7 +80,10 @@ Phase 4             Markdown output
 ```
 
 Output: `output/news/YYYY-MM-DD-tech-news.md`
-Config: Source URLs are managed in `.env` (e.g., `HACKER_NEWS_TOP_STORIES_URL`)
+Config:
+- Source declarations: `.claude/config/news-sources.yaml` (add a new source by adding one entry — no command changes needed)
+- URL values: `.env` (e.g., `HACKER_NEWS_TOP_STORIES_URL`)
+- 3 strategies: `list-then-detail`, `rss`, `json-list` (covers most REST / RSS / JSON APIs)
 
 ### `/deep-research` — 6-Agent Research
 

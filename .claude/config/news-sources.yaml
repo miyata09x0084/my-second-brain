@@ -1,0 +1,58 @@
+# テックニュースソース宣言
+#
+# 新しいソースを追加したい場合は、このファイルに entry を追加するだけで済む
+# （/tech-news コマンド本体の編集は不要）。
+#
+# URL 値は .env を参照する。${VAR} 表記を使うこと。
+# fetch.strategy は "list-then-detail" / "rss" / "json-list" のいずれか。
+
+sources:
+  - name: Hacker News
+    tag_template: "[HN 🔥{score}]"
+    limit: 10
+    fetch:
+      strategy: list-then-detail
+      list_url: ${HACKER_NEWS_TOP_STORIES_URL}
+      detail_url_template: ${HACKER_NEWS_ITEM_URL_TEMPLATE}
+    extract:
+      title: title
+      url: url
+      score: score
+
+  - name: TechCrunch
+    tag_template: "[TC]"
+    limit: 10
+    fetch:
+      strategy: rss
+      url: ${TECHCRUNCH_RSS_URL}
+    extract:
+      title: title
+      url: link
+      score: null
+
+  - name: Reddit r/technology
+    tag_template: "[Reddit ⬆{score}]"
+    limit: 10
+    fetch:
+      strategy: json-list
+      url: ${REDDIT_TECH_URL}
+      list_path: data.children
+    extract:
+      title: data.title
+      url: data.url
+      score: data.score
+
+# 出力設定
+output:
+  dir: output/news
+  filename_pattern: "{date}-tech-news.md"
+  final_count_range: [10, 20]
+
+# インサイト抽出設定
+insights:
+  count: 3
+  axes:
+    - name: 技術トレンド
+      description: 何が伸びているか、何を学ぶ/採用すべきか、何が廃れつつあるか
+    - name: 業界構造の変化
+      description: 規制・M&A・プラットフォームシフトなど、ビジネスの力学がどう動いているか

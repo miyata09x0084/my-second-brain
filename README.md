@@ -32,6 +32,8 @@ kohAI/
 ├── .claude/
 │   ├── rules/
 │   │   └── behavioral-norms.md      # 行動規範
+│   ├── config/
+│   │   └── news-sources.yaml        # /tech-news のソース宣言的定義
 │   └── commands/
 │       ├── daily-schedule.md        # /daily-schedule
 │       ├── tech-news.md             # /tech-news
@@ -78,7 +80,10 @@ Phase 4          Markdown出力
 ```
 
 出力先: `output/news/YYYY-MM-DD-tech-news.md`
-設定: ニュースソースのURLは `.env` で管理（`HACKER_NEWS_TOP_STORIES_URL` 他）
+設定:
+- ニュースソース定義は `.claude/config/news-sources.yaml`（宣言的・新規追加はここに entry を足すだけ）
+- URL 値は `.env` で管理（`HACKER_NEWS_TOP_STORIES_URL` 他）
+- 戦略は 3 種類: `list-then-detail` / `rss` / `json-list`（REST・RSS・JSON API の大半を網羅）
 
 ### `/deep-research` — 6エージェントリサーチ
 
