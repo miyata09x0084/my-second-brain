@@ -28,11 +28,13 @@ kohAI/.claude/rules/*.md         # 行動規範ルール
 ```
 kohAI/
 ├── CLAUDE.md                        # プロジェクト設定
+├── .env                             # ニュースソース等の外部URL設定
 ├── .claude/
 │   ├── rules/
 │   │   └── behavioral-norms.md      # 行動規範
 │   └── commands/
 │       ├── daily-schedule.md        # /daily-schedule
+│       ├── tech-news.md             # /tech-news
 │       ├── deep-research.md         # /deep-research
 │       ├── write-article.md         # /write-article
 │       └── agent-memory.md          # /agent-memory
@@ -45,6 +47,7 @@ kohAI/
 ├── 01_strategy/                     # ビジネス戦略
 └── output/
     ├── research/                    # リサーチ出力
+    ├── news/                        # テックニュース日次ダイジェスト
     └── articles/                    # 記事出力
 ```
 
@@ -59,6 +62,23 @@ kohAI/
 3. タスクを**緊急度×重要度×認知負荷**で分類（アイゼンハワーマトリクス）
 4. 15分刻みのスケジュールを生成（午前=集中作業、午後=ミーティング）
 5. 承認後、Google Calendarに登録
+
+### `/tech-news` — テックニュース斜め読み
+
+トリガー: 「テックニュース」「ニュース」
+
+```
+Phase 1（並列）  Hacker News / TechCrunch RSS / Reddit r/technology
+       ↓
+Phase 2          重複除去 → 日本語要約 → スコア順ソート → 10〜20件に整形
+       ↓
+Phase 3          横断分析（技術トレンド + 業界構造で3インサイト、「何が起きているか → So what?」形式）
+       ↓
+Phase 4          Markdown出力
+```
+
+出力先: `output/news/YYYY-MM-DD-tech-news.md`
+設定: ニュースソースのURLは `.env` で管理（`HACKER_NEWS_TOP_STORIES_URL` 他）
 
 ### `/deep-research` — 6エージェントリサーチ
 

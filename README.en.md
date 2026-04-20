@@ -28,11 +28,13 @@ kohAI/.claude/rules/*.md         # Behavioral rules
 ```
 kohAI/
 ├── CLAUDE.md                        # Project config
+├── .env                             # External URL config (news sources, etc.)
 ├── .claude/
 │   ├── rules/
 │   │   └── behavioral-norms.md      # Behavioral norms
 │   └── commands/
 │       ├── daily-schedule.md        # /daily-schedule
+│       ├── tech-news.md             # /tech-news
 │       ├── deep-research.md         # /deep-research
 │       ├── write-article.md         # /write-article
 │       └── agent-memory.md          # /agent-memory
@@ -45,6 +47,7 @@ kohAI/
 ├── 01_strategy/                     # Business strategy
 └── output/
     ├── research/                    # Research output
+    ├── news/                        # Daily tech news digest
     └── articles/                    # Article output
 ```
 
@@ -59,6 +62,23 @@ Trigger: "Good morning", "Today's schedule"
 3. Classify tasks by **urgency x importance x cognitive load** (Eisenhower matrix)
 4. Generate a 15-min interval schedule (morning = deep work, afternoon = meetings)
 5. Register to Google Calendar after approval
+
+### `/tech-news` — Daily Tech News Digest
+
+Trigger: "Tech news", "News"
+
+```
+Phase 1 (parallel)  Hacker News / TechCrunch RSS / Reddit r/technology
+       ↓
+Phase 2             Dedup → Japanese summaries → sort by score → 10-20 items
+       ↓
+Phase 3             Cross-article analysis (3 insights: tech trends + industry shifts, "What's happening → So what?")
+       ↓
+Phase 4             Markdown output
+```
+
+Output: `output/news/YYYY-MM-DD-tech-news.md`
+Config: Source URLs are managed in `.env` (e.g., `HACKER_NEWS_TOP_STORIES_URL`)
 
 ### `/deep-research` — 6-Agent Research
 
