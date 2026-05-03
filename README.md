@@ -22,7 +22,7 @@ Built on Claude Code, with a clear separation of three elements: **instructions,
                    ▼
     ┌──────────────────────────────┐
     │  Skills                      │  ── what to execute
-    │  (.claude/commands/)         │
+    │  (.claude/skills/)           │
     └───┬──────────────────────┬───┘
         │                      │
         ▼                      ▼
@@ -42,14 +42,20 @@ daily-coworker/
 ├── .claude/
 │   ├── rules/
 │   │   └── behavioral-norms.md        # Behavioral rules (auto-applied)
-│   ├── commands/
-│   │   ├── daily-schedule.md          # /daily-schedule  — Morning schedule
-│   │   ├── tech-news.md               # /tech-news       — Tech news digest
-│   │   ├── deep-research.md           # /deep-research   — Multi-agent research
-│   │   ├── write-article.md           # /write-article   — Article writing
-│   │   └── agent-memory.md            # /agent-memory    — AI memory management
-│   └── config/
-│       └── news-sources.yaml          # /tech-news source definitions
+│   ├── skills/                        # Skill implementations (canonical)
+│   │   ├── daily-schedule/SKILL.md    # Morning schedule
+│   │   ├── tech-news/
+│   │   │   ├── SKILL.md               # Tech news digest
+│   │   │   └── news-sources.yaml      # Source definitions
+│   │   ├── deep-research/SKILL.md     # Multi-agent research
+│   │   ├── write-article/SKILL.md     # Article writing
+│   │   └── agent-memory/SKILL.md      # AI memory management
+│   └── commands/                      # Thin wrappers for /<name> slash invocation
+│       ├── daily-schedule.md
+│       ├── tech-news.md
+│       ├── deep-research.md
+│       ├── write-article.md
+│       └── agent-memory.md
 ├── 00_context/memories/               # AI memory (*.md git-ignored; only templates tracked)
 │   ├── preferences.template.md
 │   ├── decisions.template.md
@@ -76,7 +82,12 @@ Separating the layers localizes the impact of any change.
 
 ### Skill Invocation Flow
 
-Trigger word (e.g., "look it up") → the project `CLAUDE.md` matches the corresponding skill → `.claude/commands/{skill}.md` runs. Complex skills parallelize via subagents to keep main-thread context consumption low.
+There are two invocation paths, and both end up running the same `.claude/skills/{name}/SKILL.md`:
+
+- **Natural language**: trigger words (e.g., "look it up") match definitions in the project `CLAUDE.md` → the corresponding skill auto-fires.
+- **Slash command**: `/<name>` (e.g., `/deep-research`) loads a thin wrapper in `.claude/commands/` that simply delegates to the skill.
+
+Skill is the canonical implementation; commands are aliases. Complex skills parallelize via subagents to keep main-thread context consumption low.
 
 ### Memory Handling
 

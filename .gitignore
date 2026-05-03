@@ -16,3 +16,6 @@ logs/
 
 # Claude Code ローカル設定（各マシン固有）
 .claude/settings.local.json
+
+# 内部設計ドキュメント（個人ワークスペース）
+docs/
